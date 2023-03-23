@@ -1,0 +1,185 @@
+
+.switch,
+.switch::before,
+.switch::after {
+  transition: 400ms all ease-in-out 50ms;
+  box-sizing: border-box;
+  backface-visibility: hidden;
+}
+
+/*html,body{ text-align: center; font-family: 'Sanchez', serif;}
+*/
+.divinput input[type="checkbox"] {
+  display: none;
+}
+
+.divswitch a{ color: rgba(43,43,43,1); text-decoration: none; padding: 10px; border-bottom: 2px solid rgb(43, 43, 43); }
+
+.divswitch a:hover{ background: rgba(43,43,43,1); color: rgba(255,255,255,1); }
+
+
+/*Button is :CHECKED*/
+
+ input[type="checkbox"]:checked ~.divswitch{
+  background: rgba(73,168,68,1);
+  box-shadow: 0 0 2px rgba(73,168,68,1);
+}
+
+ input[type="checkbox"]:checked ~ .divswitch label{
+  left: 17px;
+  transform: rotate(360deg);
+}
+
+
+/*shared*/
+
+.divswitch,
+.divswitch label {
+  border-radius: 50px;
+}
+
+
+/*'un':checked state*/
+
+.divswitch {
+  height: 15px;
+  /* largeur du check*/
+  width:30px;
+  background: rgba(43, 43, 43, 1);
+  position: absolute;
+  display: inline-block;
+  /*Position du check*/
+  top: 16px;
+  margin-left: 10px;
+  
+  
+  box-shadow: 0 0 2px rgba(43,43,43,1);
+  
+}
+
+.divswitch label {
+  height: 11px;
+  width: 11px;
+  background: rgb(255, 255, 255);
+  position: absolute;
+  top: 2px;
+  left: 3px;
+  cursor: pointer;
+}
+
+/*.divswitch label::before {
+  content: '';
+  height: 10px;
+  width: 2px;
+  position: absolute;
+  top: calc(50%-4px);
+  left: calc(45% -6px);
+  /*angle trait1
+  transform: rotate(45deg);
+
+}
+
+.divswitch label::after {
+  content: '';
+  height: 2px;
+  width: 10px;
+  position: absolute;
+  top: calc(50% - 2px);
+  left: calc(50% - 6px);
+  /*angle trait2
+  transform: rotate(45deg);
+}
+
+.divswitch label::before,
+.divswitch label::after{
+  /*Couleur trait1 et trait2
+  background: rgb(211, 13, 13);
+  border-radius: 3px;
+}*/
+
+/* pesduo class on toggle */
+
+ input[type="checkbox"]:checked ~ .divswitch label::before{
+  height: 30px;
+  top: calc(55% - 17px);
+  left: calc(60% );
+  background:rgba(73,168,68,1);
+  
+}
+input[type="checkbox"]:checked ~ .divswitch label::after{
+  width: 15px;
+  top: calc(95% - 18px);
+  left: calc(22.5% - 4px);
+  background: rgba(73,168,68,1);
+  
+}
+.iconclass{
+display: block;
+top: -15px;
+right: 15px;
+position: absolute;
+float: right;
+}
+
+
+
+.slide_2 {
+	
+position: relative;
+overflow: hidden;
+ 
+     
+}
+
+
+.slide_2 {
+-webkit-animation: slide2 1s 1;
+-webkit-animation-delay: 0.33s;
+ -webkit-animation-fill-mode:forwards;
+ -webkit-transform-origin: initial;
+ }
+
+ @-webkit-keyframes slide2 {
+  0%{left :0%;}
+  100%{left:100%;}
+}
+.slide_switch {
+	
+  position: relative;
+  overflow: hidden;
+   
+       
+  }
+  
+  
+  .slide_switch {
+  -webkit-animation: slide3 1s 1;
+  -webkit-animation-delay: 0.33s;
+   -webkit-animation-fill-mode:forwards;
+   -webkit-transform-origin: initial;
+   }
+  
+   @-webkit-keyframes slide3 {
+    0%{right :0%;}
+    100%{right: 230px;}
+  }
+  .slide_switchinv {
+	
+    position: relative;
+    overflow: hidden;
+     
+         
+    }
+    
+    
+    .slide_switchinv {
+    -webkit-animation: slide3inv 1s 1;
+    -webkit-animation-delay: 0.33s;
+     -webkit-animation-fill-mode:forwards;
+     -webkit-transform-origin: initial;
+     }
+    
+     @-webkit-keyframes slide3inv {
+      0%{right:230px ;}
+      100%{right:0px ;}
+    }

@@ -1,0 +1,25 @@
+10)
+PI[NF],SIGMA(NU=1 || NU=2),Livraison/Fournisseur
+
+Correction :
+
+1)
+R1=PI(NF), SIGMA(NU!=1 && NU!=2),Livraison
+R=PI(NF),Livraison-R1.
+
+2)
+
+
+11)
+Correction :
+
+R=SIGMA(NF=3),Livraison
+R'=PI(NP),R'
+R''=PI(NU),R'/Livraison
+
+13) 
+R=Livraison/Fournisseur/Produit
+R'=SIGMA(ville=MArseille || couleur != Rouge) R
+R
+
+15)

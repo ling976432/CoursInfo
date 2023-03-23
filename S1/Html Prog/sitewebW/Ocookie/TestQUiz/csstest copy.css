@@ -1,0 +1,110 @@
+
+*,
+*::before,
+*::after {
+  transition: 400ms all ease-in-out 50ms;
+  box-sizing: border-box;
+  backface-visibility: hidden;
+}
+
+/*html,body{ text-align: center; font-family: 'Sanchez', serif;}
+*/
+input[type="checkbox"] {
+  display: none;
+}
+
+a{ color: rgba(43,43,43,1); text-decoration: none; padding: 10px; border-bottom: 2px solid rgb(43, 43, 43); }
+
+a:hover{ background: rgba(43,43,43,1); color: rgba(255,255,255,1); }
+
+
+/*Button is :CHECKED*/
+
+input[type="checkbox"]:checked ~ div {
+  background: rgba(73,168,68,1);
+  box-shadow: 0 0 2px rgba(73,168,68,1);
+}
+
+input[type="checkbox"]:checked ~ div label {
+  left: 110px;
+  transform: rotate(360deg);
+}
+
+
+/*shared*/
+
+div,
+label {
+  border-radius: 50px;
+}
+
+
+/*'un':checked state*/
+
+div {
+  height: 50px;
+  /* largeur du check*/
+  width:160px;
+  background: rgba(43, 43, 43, 1);
+  position: relative;
+  /*Position du check*/
+  top: calc(50vh - 50px);
+  left: calc(50vw - 100px);
+  
+  box-shadow: 0 0 2px rgba(43,43,43,1);
+  
+}
+
+label {
+  height: 45px;
+  width: 45px;
+  background: rgb(255, 255, 255);
+  position: absolute;
+  top: 3px;
+  left: 5px;
+  cursor: pointer;
+}
+
+label::before {
+  content: '';
+  height: 50px;
+  width: 4px;
+  position: absolute;
+  top: calc(50% - 25px);
+  left: calc(50% - 2px);
+  /*angle trait1*/
+  transform: rotate(45deg);
+}
+
+label::after {
+  content: '';
+  height: 4px;
+  width: 50px;
+  position: absolute;
+  top: calc(50% - 2px);
+  left: calc(50% - 25px);
+  /*angle trait2*/
+  transform: rotate(45deg);
+}
+
+label::before,
+label::after{
+  /*Couleur trait1 et trait2*/
+  background: rgba(43,43,43,1);
+  border-radius: 5px;
+}
+
+/* pesduo class on toggle */
+
+input[type="checkbox"]:checked ~ div label::before{
+  height: 30px;
+  top: calc(55% - 17px);
+  left: calc(60% );
+  background:rgba(73,168,68,1);
+}
+input[type="checkbox"]:checked ~ div label::after{
+  width: 15px;
+  top: calc(95% - 18px);
+  left: calc(22.5% - 4px);
+  background: rgba(73,168,68,1);
+}

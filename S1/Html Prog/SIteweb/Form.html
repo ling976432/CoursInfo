@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Form-v2 by Colorlib</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <link rel="stylesheet" type="text/css"
+    href="TestQUiz\roboto-font.css">
+
+
+  <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
+
+  <link rel="stylesheet" href="TestQUiz\style.css" />
+  <meta name="robots" content="noindex, follow">
+  <script
+    nonce="7836c9d2-78d6-47f2-8e55-aecc727143b1">(function (w, d) { !function (Z, _, ba, bb) { Z.zarazData = Z.zarazData || {}; Z.zarazData.executed = []; Z.zaraz = { deferred: [], listeners: [] }; Z.zaraz.q = []; Z.zaraz._f = function (bc) { return function () { var bd = Array.prototype.slice.call(arguments); Z.zaraz.q.push({ m: bc, a: bd }) } }; for (const be of ["track", "set", "debug"]) Z.zaraz[be] = Z.zaraz._f(be); Z.zaraz.init = () => { var bf = _.getElementsByTagName(bb)[0], bg = _.createElement(bb), bh = _.getElementsByTagName("title")[0]; bh && (Z.zarazData.t = _.getElementsByTagName("title")[0].text); Z.zarazData.x = Math.random(); Z.zarazData.w = Z.screen.width; Z.zarazData.h = Z.screen.height; Z.zarazData.j = Z.innerHeight; Z.zarazData.e = Z.innerWidth; Z.zarazData.l = Z.location.href; Z.zarazData.r = _.referrer; Z.zarazData.k = Z.screen.colorDepth; Z.zarazData.n = _.characterSet; Z.zarazData.o = (new Date).getTimezoneOffset(); Z.zarazData.q = []; for (; Z.zaraz.q.length;) { const bl = Z.zaraz.q.shift(); Z.zarazData.q.push(bl) } bg.defer = !0; for (const bm of [localStorage, sessionStorage]) Object.keys(bm || {}).filter((bo => bo.startsWith("_zaraz_"))).forEach((bn => { try { Z.zarazData["z_" + bn.slice(7)] = JSON.parse(bm.getItem(bn)) } catch { Z.zarazData["z_" + bn.slice(7)] = bm.getItem(bn) } })); bg.referrerPolicy = "origin"; bg.src = "/cdn-cgi/zaraz/s.js?z=" + btoa(encodeURIComponent(JSON.stringify(Z.zarazData))); bf.parentNode.insertBefore(bg, bf) };["complete", "interactive"].includes(_.readyState) ? zaraz.init() : Z.addEventListener("DOMContentLoaded", zaraz.init) }(w, d, 0, "script"); })(window, document);</script>
+</head>
+
+<body onload="CookieSiteLucas()" class="form-v2">
+  <div class="page-content">
+    <div class="form-v2-content">
+      <div class="form-left">
+        <img src="pinguins qui danse.gif" alt="form">
+        <div class="text-1">
+          <p>Welcome to my website<span>But firstly ...</span></p>
+        </div>
+        <div class="text-2">
+
+        </div>
+      </div>
+      <form class="form-detail" action="HOMEPAGE.html" method="POST" id="myform">
+        <h2>...Who are you to try to go on my website</h2>
+        <div class="form-row">
+          <label for="full-name">Full Name:</label>
+          <input type="text" name="full_name" id="full_name" class="input-text" placeholder="ex: Lindsey Wilson"
+            required>
+        </div>
+
+
+        <div class="form-row">
+          <label for="your_email">Your Email:</label>
+          <input type="text" name="your_email" id="your_email" class="input-text" required
+            pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}">
+        </div>
+
+
+        <div class="form-row">
+          <label for="phone">Your phone number:</label>
+          <input type="number" name="tel" id="tel" class="input-text" required
+            pattern="^(?:0|\(?\+33\)?\s?|0033\s?)[1-79](?:[\.\-\s]?\d\d){4}$">
+        </div>
+
+
+        <div class="form-row">
+          <label for="date">Birth date</label>
+          <input type="date" name="date" id="date" class="input-text" required>
+        </div>
+
+
+
+        <div class="form-row-last">
+          <button type="submit" name="register" class="register" value="Register" style="padding: 20px;" onclick="FormCreateCookie()">Register
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+  <script>
+    $("#myform").validate({
+      messages: {
+        full_name: {
+          required: "Please provide an username",
+        },
+        your_email: {
+          required: "Please provide an email",
+        },
+        tel: {
+          required: "Please provide a phone number",
+        },
+        date: {
+          required: "Please enter your date",
+
+        }
+        
+
+      }
+    });
+  </script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+  <script async src="Jssapifedyna.js"></script>
+  <script async src="jssiteweb.js"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-23581568-13');
+  </script>
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194"
+    integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw=="
+    data-cf-beacon='{"rayId":"75fa8f95bb78d584","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2022.10.3","si":100}'
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
