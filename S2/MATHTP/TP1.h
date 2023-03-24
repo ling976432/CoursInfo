@@ -33,7 +33,7 @@ public:
     void DegGraph();       // return un int qui est le degré du graph
     void identite();
     Graph getConnexite(int); // retourne une matrice qui permet d'obtenir la connexité entre tous le spoints du graphe prend en argument le degré souhaité
-    int floydMarshall(Graph g,int n1,int n2);
+    Graph floydMarshall();
     int depthSearch();
 
 

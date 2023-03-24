@@ -350,32 +350,30 @@ Graph Graph::getConnexite(int deg)
 }
 
 
-/*If no path return 0, else return */
-int Graph::floydMarshall(Graph g, int n1, int n2)
+/*Return a Graph with */
+Graph Graph::floydMarshall()
 {
-    Graph temp = g;
-    node *nd;
 
-    for (int i = 0; i < g.m_n; i++)
-    {
-        nd = temp.getConnexion();
-        for (int j = 0; i < g.m_n; i++)
-        {
-
-            if (nd[n1 - 1].connex[j] == n2 - 1)
-            {
-                return i;
+    
+    Graph temp;
+    temp=m_g;
+    for (int k = 0; k < m_n; k++) {
+        for (int i = 0; i < m_n; i++) {
+            for (int j = 0; j < m_n; j++) {
+                if (temp[i][k] != 0 && temp[k][j] != 0 && temp[i][k] + temp[k][j] < temp[i][j]) {
+                    temp[i][j] = temp[i][k] + temp[k][j];
+                }
             }
-        }
+            }
+            return temp;
     }
-    return 0;
 }
-int Graph::depthSearch(Graph )
-{
+// int Graph::depthSearch(Graph )
+// {
 
 
 
-}
+// }
 /*void floydWarshall(int graph[][V]) {
     // Application de l'algorithme de Floyd-Warshall
     for (k = 0; k < V; k++) {
