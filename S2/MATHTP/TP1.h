@@ -18,6 +18,7 @@ private:
     int **m_g; // Graph
     int m_n;   // taille du graphe (matrice carré)
     int Max(int a, int b);
+    int Min(int a, int b);
 
 public:
     /*Fonction de base*/
@@ -33,8 +34,9 @@ public:
     void DegGraph();       // return un int qui est le degré du graph
     void identite();
     Graph getConnexite(int); // retourne une matrice qui permet d'obtenir la connexité entre tous le spoints du graphe prend en argument le degré souhaité
-    Graph floydMarshall();
-    int depthSearch();
+     Graph floydMarshall(Graph g);
+     void FloydGraph();//Transforme un Graph en Graph pour floyd
+    // int depthSearch();
 
 
     /*Fonction node*/

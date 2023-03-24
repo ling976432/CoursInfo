@@ -7,17 +7,20 @@ int main()
 
 
 
-node* a;
-Graph g(2);
-
-
-
-
-//g.randomGraph();
+Graph g(4);
+Graph temp(4);
+g.randomGraph();
 g.affichageGraph();
+
+g.FloydGraph();
+
+g.affichageGraph();
+
+
+
+
 //g.getConnexite(2,g);
 // a=g.getConnexion();
 // g.printNode(a);
-return 1;
-
+return 0;
 }

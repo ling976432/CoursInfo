@@ -21,6 +21,18 @@ int Graph::Max(int a, int b)
     }
 }
 
+int Graph::Min(int a, int b)
+{
+    if (a < b)
+    {
+        return a;
+    }
+    else
+    {
+        return b;
+    }
+}
+
 Graph::Graph() // fonctionne
 {
     int **m_g = nullptr;
@@ -282,18 +294,16 @@ void Graph::operator=(int ** i)
     j++;
     
    }
-   std::cout << j << std::endl;
-   cout<<"d";
 
 
    //allocation de mémoire
    m_n = j;
     m_g = new int *[m_n];
     assert(m_g);
-    for (int i = 0; i < m_n; i++)
+    for (int z = 0; z < m_n; z++)
     {
-        m_g[i] = new int[m_n];
-        assert(m_g[i]);
+        m_g[z] = new int[m_n];
+        assert(m_g[z]);
     }
     
 
@@ -314,7 +324,7 @@ void Graph::operatorGraph(Graph g)
         {
             for (int k = 0; k < m_n; ++k)
             {
-                m_g[i][j] = max(m_g[i][j], g.m_g[i][k] * m_g[k][j]);
+                m_g[i][j] = Max(m_g[i][j], g.m_g[i][k] * m_g[k][j]);
             }
         }
     }
@@ -348,42 +358,48 @@ Graph Graph::getConnexite(int deg)
 
     return temp2;
 }
-
-
-/*Return a Graph with */
-Graph Graph::floydMarshall()
+/* Return graph with chemin , else return */
+Graph Graph::floydMarshall(Graph g)
 {
-
     
     Graph temp;
-    temp=m_g;
-    for (int k = 0; k < m_n; k++) {
-        for (int i = 0; i < m_n; i++) {
-            for (int j = 0; j < m_n; j++) {
-                if (temp[i][k] != 0 && temp[k][j] != 0 && temp[i][k] + temp[k][j] < temp[i][j]) {
-                    temp[i][j] = temp[i][k] + temp[k][j];
+    temp=g;
+    for (int i = 0; i < m_n; ++i)
+    {
+        for (int j = 0; j < m_n; ++j)
+        {
+            for (int k = 0; k < m_n; ++k)
+            {
+                temp[i][j] =min(temp[i][j], temp[i][k] + temp[k][j]);
+                
+                
+            }
+            if (i==j)
+                {
+                    temp[i][j]=0;
                 }
-            }
-            }
-            return temp;
+        }
     }
+    return temp;
 }
-// int Graph::depthSearch(Graph )
-// {
 
-
-
-// }
-/*void floydWarshall(int graph[][V]) {
-    // Application de l'algorithme de Floyd-Warshall
-    for (k = 0; k < V; k++) {
-        for (i = 0; i < V; i++) {
-            for (j = 0; j < V; j++) {
-                if (dist[i][k] != INT_MAX && dist[k][j] != INT_MAX && dist[i][k] + dist[k][j] < dist[i][j]) {
-                    dist[i][j] = dist[i][k] + dist[k][j];
-                }
+void Graph::FloydGraph()
+{
+    for (int i = 0; i < m_n; i++)
+    {
+        for (int j = 0; j < m_n; j++)
+        {
+            if ( m_g[i][j]==0 ) 
+            {
+               m_g[i][j]=999999;
             }
-            }*/
+            
+        }
+        
+    }
+    
+}
+
 int Graph::getTaille() // GETtaille
 {
     return m_n;
