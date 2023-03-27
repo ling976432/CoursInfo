@@ -88,18 +88,34 @@ Graph::Graph(const Graph &Gr) // fonctionne
 void Graph::randomGraph() // fonctionne
 
 {
+
     srand(time(NULL));
     for (int i = 0; i < m_n; i++)
     {
         for (int j = 0; j < m_n; j++)
         {
+            if (j>i)
+            {
+                break;;
+            }
+              
             m_g[i][j] = rand() % 2;
+            m_g[j][i]=m_g[i][j];
+            
+        }
+    }
+    for (int i = 0; i < m_n; i++)
+    {
+        for (int j = 0; j < m_n; j++)
+        {
             if (i == j)
             {
                 m_g[i][j] = 0;
             }
         }
+        
     }
+    
 }
 
 int *&Graph::operator[](const int &index) // overloading operator []
@@ -152,14 +168,14 @@ node *Graph::getConnexion()
             else if (m_g[i][j] != 1)
             {
 
-                nd[i].connex[indexConnex] = 999;
+                nd[i].connex[indexConnex] = MAX;
 
                 indexConnex++;
             }
             else if (i == j)
             {
 
-                nd[i].connex[indexConnex] = 999;
+                nd[i].connex[indexConnex] = MAX;
                 indexConnex++;
             }
         }
@@ -182,7 +198,29 @@ void Graph::printNode(node *nd)
         cout << " )" << endl;
     }
 }
-
+void Graph::CentreGraph(Graph g)
+{
+    node* a;
+    int node;
+    int test=MAX;
+    int sum=0;
+    for (int i = 0; i < m_n; i++)
+    {
+        for (int j = 0; j < m_n; j++)
+        {
+            sum+=m_g[i][j];
+        }
+        if (sum<test)
+        {
+            node=i;
+            test=sum;
+        }
+    }
+    a=g.getConnexion();
+    cout<<"Le centre est :"<<node+1<<endl;
+    
+}
+/*Return Deg d'un Graph*/
 void Graph::DegGraph()
 {
     int deg = 0;
@@ -250,7 +288,7 @@ void Graph::affichageGraph() // fonctionne
         cout << endl;
     }
 }
-
+/* OPerator = Graph*/
 void Graph::operator=(const Graph &g)
 {
     // si les magt font la même taille
@@ -285,6 +323,7 @@ void Graph::operator=(const Graph &g)
     }
 }
 
+/*operator = between Graph and int** */
 void Graph::operator=(int ** i)
 {
     //determiner taille tableau
@@ -314,7 +353,7 @@ void Graph::operator=(int ** i)
 }
 
 
-
+/*Operator to make mul to graph*/
 void Graph::operatorGraph(Graph g)
 {
 
@@ -329,7 +368,7 @@ void Graph::operatorGraph(Graph g)
         }
     }
 }
-
+/*Get what node is connected to what node*/
 Graph Graph::getConnexite(int deg)
 {
     Graph temp1;
@@ -358,19 +397,20 @@ Graph Graph::getConnexite(int deg)
 
     return temp2;
 }
-/* Return graph with chemin , else return */
+/* Return graph with how much link u have go go through to go frome one node to another , else return */
 Graph Graph::floydMarshall(Graph g)
 {
     
     Graph temp;
     temp=g;
+    temp.FloydGraph();
     for (int i = 0; i < m_n; ++i)
     {
         for (int j = 0; j < m_n; ++j)
         {
             for (int k = 0; k < m_n; ++k)
             {
-                temp[i][j] =min(temp[i][j], temp[i][k] + temp[k][j]);
+                temp[i][j] =Min(temp[i][j], temp[i][k] + temp[k][j]);
                 
                 
             }
@@ -379,6 +419,19 @@ Graph Graph::floydMarshall(Graph g)
                     temp[i][j]=0;
                 }
         }
+        // for (int i = 0; i < m_n; i++)
+        // {
+        //     for (int j = 0; j < m_n; j++)
+        //     {
+        //         if (temp[i][j]==MAX)
+        //         {
+        //             temp[i][j]=temp[j][i];
+        //         }
+                
+        //     }
+            
+        // }
+        
     }
     return temp;
 }
@@ -391,13 +444,35 @@ void Graph::FloydGraph()
         {
             if ( m_g[i][j]==0 ) 
             {
-               m_g[i][j]=999999;
+               m_g[i][j]=MAX;
             }
             
         }
         
     }
     
+}
+
+void Graph::depthSearch(Graph g, int start, int end, vector<node> nd)
+{
+    nd[0].wet=1;
+    for (int i = 0; i < m_n; i++)
+    {
+        if (nd[0].connex[i]==end)
+        {
+            nd.nd[0].connex[i]
+
+        }
+        
+    }
+    
+    
+
+
+
+
+
+
 }
 
 int Graph::getTaille() // GETtaille

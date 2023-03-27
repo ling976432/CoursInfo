@@ -7,15 +7,18 @@ int main()
 
 
 
-Graph g(4);
-Graph temp(4);
+Graph g(8);
+Graph temp;
 g.randomGraph();
 g.affichageGraph();
 
-g.FloydGraph();
 
-g.affichageGraph();
 
+temp=g.floydMarshall(g);
+temp.affichageGraph();
+
+
+temp.CentreGraph(temp);
 
 
 

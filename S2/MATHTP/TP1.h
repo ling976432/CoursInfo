@@ -4,6 +4,7 @@ using namespace std;
 #include <math.h>
 #include <vector>
 #pragma once
+#define MAX 999999
 
 struct node
 {
@@ -34,14 +35,15 @@ public:
     void DegGraph();       // return un int qui est le degré du graph
     void identite();
     Graph getConnexite(int); // retourne une matrice qui permet d'obtenir la connexité entre tous le spoints du graphe prend en argument le degré souhaité
-     Graph floydMarshall(Graph g);
-     void FloydGraph();//Transforme un Graph en Graph pour floyd
-    // int depthSearch();
+    Graph floydMarshall(Graph g);
+    void FloydGraph();//Transforme un Graph en Graph pour floyd
+    Graph depthSearch();
 
 
     /*Fonction node*/
     node *getConnexion();   // retourne à quoi chaque node est connecté
     void printNode(node *); // affiche les node et leurs
+    void CentreGraph(Graph g);//retourne la node qui est le centre du Graph
 
     /*Get*/
     int getTaille(); // get taille graphe
