@@ -8,4 +8,5 @@ def pgcd(a,b) :
 a = 12
 b=143
 
-pgcd(a,b)
+
+print(pgcd(a,b))

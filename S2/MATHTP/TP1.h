@@ -6,16 +6,36 @@ using namespace std;
 #pragma once
 #define MAX 999999
 
+enum Color
+{
+   rouge,
+   jaune,
+   vert,
+   noir,
+   blanc,
+   gris,
+   bleu
+    
+};
+
+
+
 struct node
 {
     int node;
-    int *connex;
+    int* connex;
     int wet; // wet == 0 not wet, wet==1 is wet
+    Color couleur;
+    
 };
+
+
+
 
 class Graph
 {
 private:
+    int step[MAX]={};
     int **m_g; // Graph
     int m_n;   // taille du graphe (matrice carré)
     int Max(int a, int b);
@@ -37,7 +57,10 @@ public:
     Graph getConnexite(int); // retourne une matrice qui permet d'obtenir la connexité entre tous le spoints du graphe prend en argument le degré souhaité
     Graph floydMarshall(Graph g);
     void FloydGraph();//Transforme un Graph en Graph pour floyd
-    Graph depthSearch();
+    void bfs(int,int,Graph g);
+    //fonction Color
+    bool TestCouleur(Graph g);
+
 
 
     /*Fonction node*/

@@ -94,14 +94,14 @@ void Graph::randomGraph() // fonctionne
     {
         for (int j = 0; j < m_n; j++)
         {
-            if (j>i)
+            if (j > i)
             {
-                break;;
+                break;
+                ;
             }
-              
+
             m_g[i][j] = rand() % 2;
-            m_g[j][i]=m_g[i][j];
-            
+            m_g[j][i] = m_g[i][j];
         }
     }
     for (int i = 0; i < m_n; i++)
@@ -113,9 +113,7 @@ void Graph::randomGraph() // fonctionne
                 m_g[i][j] = 0;
             }
         }
-        
     }
-    
 }
 
 int *&Graph::operator[](const int &index) // overloading operator []
@@ -189,6 +187,7 @@ void Graph::printNode(node *nd)
     for (int i = 0; i < m_n; i++)
     {
         cout << "[" << nd[i].node + 1 << "]";
+        cout << "{" << nd[i].couleur << "}" << endl;
         cout << ": (";
         for (int j = 0; j < m_n; j++)
         {
@@ -200,25 +199,24 @@ void Graph::printNode(node *nd)
 }
 void Graph::CentreGraph(Graph g)
 {
-    node* a;
+    node *a;
     int node;
-    int test=MAX;
-    int sum=0;
+    int test = MAX;
+    int sum = 0;
     for (int i = 0; i < m_n; i++)
     {
         for (int j = 0; j < m_n; j++)
         {
-            sum+=m_g[i][j];
+            sum += m_g[i][j];
         }
-        if (sum<test)
+        if (sum < test)
         {
-            node=i;
-            test=sum;
+            node = i;
+            test = sum;
         }
     }
-    a=g.getConnexion();
-    cout<<"Le centre est :"<<node+1<<endl;
-    
+    a = g.getConnexion();
+    cout << "Le centre est :" << node + 1 << endl;
 }
 /*Return Deg d'un Graph*/
 void Graph::DegGraph()
@@ -324,19 +322,17 @@ void Graph::operator=(const Graph &g)
 }
 
 /*operator = between Graph and int** */
-void Graph::operator=(int ** i)
+void Graph::operator=(int **i)
 {
-    //determiner taille tableau
-    int j=0;
-   while(i[j])
-   {
-    j++;
-    
-   }
+    // determiner taille tableau
+    int j = 0;
+    while (i[j])
+    {
+        j++;
+    }
 
-
-   //allocation de mémoire
-   m_n = j;
+    // allocation de mémoire
+    m_n = j;
     m_g = new int *[m_n];
     assert(m_g);
     for (int z = 0; z < m_n; z++)
@@ -344,14 +340,10 @@ void Graph::operator=(int ** i)
         m_g[z] = new int[m_n];
         assert(m_g[z]);
     }
-    
 
-    //copie int** dans graph.m_g
-   m_g=i;
-   
-    
+    // copie int** dans graph.m_g
+    m_g = i;
 }
-
 
 /*Operator to make mul to graph*/
 void Graph::operatorGraph(Graph g)
@@ -374,9 +366,8 @@ Graph Graph::getConnexite(int deg)
     Graph temp1;
     Graph temp2;
     temp2 = m_g;
-    temp1=m_g;
+    temp1 = m_g;
 
-    
     // g=m_g;
     if (deg > 1)
     {
@@ -400,9 +391,9 @@ Graph Graph::getConnexite(int deg)
 /* Return graph with how much link u have go go through to go frome one node to another , else return */
 Graph Graph::floydMarshall(Graph g)
 {
-    
+
     Graph temp;
-    temp=g;
+    temp = g;
     temp.FloydGraph();
     for (int i = 0; i < m_n; ++i)
     {
@@ -410,14 +401,12 @@ Graph Graph::floydMarshall(Graph g)
         {
             for (int k = 0; k < m_n; ++k)
             {
-                temp[i][j] =Min(temp[i][j], temp[i][k] + temp[k][j]);
-                
-                
+                temp[i][j] = Min(temp[i][j], temp[i][k] + temp[k][j]);
             }
-            if (i==j)
-                {
-                    temp[i][j]=0;
-                }
+            if (i == j)
+            {
+                temp[i][j] = 0;
+            }
         }
         // for (int i = 0; i < m_n; i++)
         // {
@@ -427,11 +416,10 @@ Graph Graph::floydMarshall(Graph g)
         //         {
         //             temp[i][j]=temp[j][i];
         //         }
-                
+
         //     }
-            
+
         // }
-        
     }
     return temp;
 }
@@ -442,39 +430,57 @@ void Graph::FloydGraph()
     {
         for (int j = 0; j < m_n; j++)
         {
-            if ( m_g[i][j]==0 ) 
+            if (m_g[i][j] == 0)
             {
-               m_g[i][j]=MAX;
+                m_g[i][j] = MAX;
+            }
+        }
+    }
+}
+
+void Graph::bfs(int start, int j, Graph g)
+{
+    // Set current node as visited
+
+    node *nd = g.getConnexion();
+    g.step[start] = 1;
+    // For every node of the graph
+    for (int i = 0; i < g.m_n; i++)
+    {
+        if (g.m_g[start][i] == 1 && (nd[i].wet) == 0)
+        {
+            j++;
+            bfs(i, j, g);
+            g.step[i] = i + 1;
+            j = 0;
+        }
+    }
+}
+/**
+ * Return a bool true if clor condition is respected false etheir way
+*/
+bool Graph::TestCouleur(Graph g)
+{
+    node *nd = g.getConnexion();
+    Color c;
+       for (int i = 0; i < g.getTaille(); i++)
+    {
+        nd[i].couleur=c;
+        for (int j = 0; j < g.getTaille(); j++)
+        {
+            if (nd[i].connex[j]==NULL)
+            {
+                break;
             }
             
+            if (nd[nd[i].connex[j]].couleur=c)
+            {
+                return false;
+            } 
         }
-        
     }
-    
+    return true;
 }
-
-void Graph::depthSearch(Graph g, int start, int end, vector<node> nd)
-{
-    nd[0].wet=1;
-    for (int i = 0; i < m_n; i++)
-    {
-        if (nd[0].connex[i]==end)
-        {
-            nd.nd[0].connex[i]
-
-        }
-        
-    }
-    
-    
-
-
-
-
-
-
-}
-
 int Graph::getTaille() // GETtaille
 {
     return m_n;
