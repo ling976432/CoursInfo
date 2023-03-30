@@ -7,7 +7,6 @@
 #include "TP1.h"
 #include <cassert>
 
-
 /* PUBLIC MEMBER FUNCTIONS
  ********************************/
 int Graph::Max(int a, int b)
@@ -98,7 +97,6 @@ void Graph::randomGraph() // fonctionne
             if (j > i)
             {
                 break;
-                
             }
 
             m_g[i][j] = rand() % 2;
@@ -143,6 +141,7 @@ node *Graph::getConnexion()
 {
 
     // reservation de memoire
+
     int indexConnex;
     node *nd = new node[m_n];
     for (int i = 0; i < m_n; i++)
@@ -160,24 +159,24 @@ node *Graph::getConnexion()
             if (m_g[i][j] == 1)
             {
 
-                nd[i].connex[indexConnex] = 1;
+                nd[i].connex[indexConnex] = indexConnex;
 
                 indexConnex++;
             }
             else if (m_g[i][j] != 1)
             {
 
-                nd[i].connex[indexConnex] = MAX;
+                nd[i].connex[indexConnex] = 0;
 
                 indexConnex++;
             }
             else if (i == j)
             {
-
-                nd[i].connex[indexConnex] = MAX;
+                nd[i].connex[indexConnex] = 0;
                 indexConnex++;
             }
         }
+        nd[i].tailleConnex = indexConnex;
     }
 
     return nd;
@@ -326,7 +325,6 @@ void Graph::operator=(const Graph &g)
 void Graph::operatorIntToGraph(int **g, int taille)
 {
     // determiner taille tableau
-    
 
     // allocation de mémoire
     m_n = taille;
@@ -343,12 +341,10 @@ void Graph::operatorIntToGraph(int **g, int taille)
     {
         for (int j = 0; j < m_n; j++)
         {
-            m_g[i][j]=g[i][j];
+            m_g[i][j] = g[i][j];
         }
-        
     }
 }
-    
 
 /*Operator to make mul to graph*/
 void Graph::operatorGraph(Graph g)
@@ -368,18 +364,14 @@ void Graph::operatorGraph(Graph g)
 /*Get what node is connected to what node*/
 Graph Graph::getConnexite(int deg)
 {
-  
-    Graph temp1;
-    
-    Graph temp2;
-    
-    
-    temp2.operatorIntToGraph(m_g,m_n);
-   
-    temp1.operatorIntToGraph(m_g,m_n);
-   
-   
 
+    Graph temp1;
+
+    Graph temp2;
+
+    temp2.operatorIntToGraph(m_g, m_n);
+
+    temp1.operatorIntToGraph(m_g, m_n);
 
     // g=m_g;
     if (deg > 1)
@@ -402,7 +394,7 @@ Graph Graph::getConnexite(int deg)
     return temp2;
 }
 /* Return graph with how much link u have go go through to go frome one node to another , else return */
-Graph Graph::floydMarshall(Graph g,int compteur)
+Graph Graph::floydMarshall(Graph g, int compteur)
 {
 
     Graph temp;
@@ -435,7 +427,7 @@ Graph Graph::floydMarshall(Graph g,int compteur)
 
         // }
     }
-    cout<<compteur<<endl;
+    cout << compteur << endl;
     return temp;
 }
 
@@ -456,7 +448,7 @@ void Graph::FloydGraph()
 void Graph::bfs(int start, int j, int compteur)
 {
     // Set current node as visited
-    isWet[start]=1;
+    isWet[start] = 1;
     step[start] = 1;
     // For every node of the graph
     for (int i = 0; i < m_n; i++)
@@ -464,41 +456,63 @@ void Graph::bfs(int start, int j, int compteur)
         if (m_g[start][i] == 1 && (isWet[i]) == 0)
         {
             j++;
-            bfs(i, j,compteur++);
+            bfs(i, j, compteur++);
             step[i] = i + 1;
             j = 0;
-            
         }
     }
-    
-    cout<<compteur<<endl;
-    
 }
 /**
  * Return a bool true if clor condition is respected false etheir way
-*/
-// bool Graph::TestCouleur(Graph g)
-// {
-//     node *nd = g.getConnexion();
-//     Color c;
-//        for (int i = 0; i < g.getTaille(); i++)
-//     {
-//         nd[i].couleur=c;
-//         for (int j = 0; j < g.getTaille(); j++)
-//         {
-//             if (nd[i].connex[j]==NULL)
-//             {
-//                 break;
-//             }
-            
-//             if (nd[nd[i].connex[j]].couleur=c)
-//             {
-//                 return false;
-//             } 
-//         }
-//     }
-//     return true;
-// }
+ */
+bool Graph::TestCouleurGraph(Graph g)
+{
+    node *nd = g.getConnexion();
+
+    for (int i = 0; i < g.getTaille(); i++)
+    {
+
+        for (int j = 0; j < nd[i].tailleConnex; j++)
+        {
+
+            if (nd[nd[i].connex[j]].color = nd[i].color)
+            {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+void Graph::ColoriageGraph(Graph g)
+{
+    node *nd = g.getConnexion();
+    int test;
+    for (int i = 0; i < m_n; i++)
+    {
+
+        while (TestCouleurNode(nd[i], nd))
+        {
+            test = (int)nd[i].color;
+            nd[i].color = (Couleur)(test + 1);
+        }
+    }
+}
+/*Return true if */
+bool Graph::TestCouleurNode(node nd, node *ndtab)
+{
+    for (int i = 0; i < m_n; i++)
+    {
+        for (int j = 0; j < nd.tailleConnex; j++)
+        {
+            if (ndtab[ndtab[i].connex[j]].color == nd.color)
+            {
+                return true;
+            }
+        }
+    }
+     return false;
+}
+
 int Graph::getTaille() // GETtaille
 {
     return m_n;

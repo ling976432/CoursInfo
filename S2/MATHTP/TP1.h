@@ -6,12 +6,32 @@ using namespace std;
 #pragma once
 #define MAX 999999
 
+enum Couleur
+{
+    Rouge,
+    Vert,
+    Gris,
+    Rose,
+    Bleu,
+    Noir 
+};
+
+// struct link
+// {
+//     node* FirstLink;
+//     node* SecondLink;
+//     Couleur color;
+
+// };
 
 struct node
 {
     int node;
+    int taillenode;
     int *connex;
-    int wet; // wet == 0 not wet, wet==1 is wet
+    int tailleConnex;
+    int wet=0; // wet == 0 not wet, wet==1 is wet
+    Couleur color=Vert;
 };
 
 class Graph
@@ -49,6 +69,10 @@ public:
     void printNode(node *);    // affiche les node et leurs
     void CentreGraph(Graph g); // retourne la node qui est le centre du Graph
 
+    /*Coloriage Graphe*/
+    bool TestCouleurGraph(Graph g);
+    void ColoriageGraph(Graph g);
+    bool TestCouleurNode(node nd, node *ndtab);
     /*Get*/
     int getTaille(); // get taille graphe
     int **getMat();  // get Graphe en **int

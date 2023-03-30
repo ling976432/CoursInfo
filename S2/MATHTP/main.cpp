@@ -9,12 +9,18 @@ int main()
 
 Graph g(8);
 Graph temp;
-int a;
+node* a;
+
 
 
 g.randomGraph();
-temp=g.floydMarshall(g,a);
-g.bfs(0,4,a);
+a=g.getConnexion();
+for (int i = 0; i < g.getTaille(); i++)
+{
+    cout<<(Couleur)a[i].color<<endl;
+}
+
+g.printNode(a);
 // g.affichageGraph();
 // temp.affichageGraph();
  
