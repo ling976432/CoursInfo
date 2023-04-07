@@ -3,7 +3,7 @@
  */
 
 #include <stdexcept>
-#include "matrix.h"
+#include "matrixexample.h"
 
 #define EPS 1e-10
 

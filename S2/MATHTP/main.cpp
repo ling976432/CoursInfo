@@ -1,26 +1,45 @@
 #include "TP1.h"
 
 
+void freenode(node a)
+{
+   
+    delete[] a.connex;
 
+
+}
+void freenodetab(node* a)
+{
+    for (int i = 1; i < a->taillemat; i++)
+    {
+        freenode(a[i]);
+        
+    }
+   delete[] a;
+     
+    
+}
 int main()
 {
 
 
 
-Graph g(8);
+Graph g(5);
 Graph temp;
 node* a;
 
 
 
 g.randomGraph();
+g.affichageGraph();
 a=g.getConnexion();
-for (int i = 0; i < g.getTaille(); i++)
-{
-    cout<<(Couleur)a[i].color<<endl;
-}
-
 g.printNode(a);
+freenodetab(a);
+std::cout << "d" << std::endl;
+
+
+
+
 // g.affichageGraph();
 // temp.affichageGraph();
  

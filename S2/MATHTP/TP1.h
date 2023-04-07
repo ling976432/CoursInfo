@@ -26,12 +26,13 @@ enum Couleur
 
 struct node
 {
-    int node;
-    int taillenode;
+    int taillemat=0;
+    int node=0;
+    int taillenode=0;
     int *connex;
-    int tailleConnex;
+    int tailleConnex=0;
     int wet=0; // wet == 0 not wet, wet==1 is wet
-    Couleur color=Vert;
+    int color=1;
 };
 
 class Graph

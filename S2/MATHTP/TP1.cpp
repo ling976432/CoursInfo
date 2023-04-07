@@ -35,7 +35,7 @@ int Graph::Min(int a, int b)
 
 Graph::Graph() // fonctionne
 {
-    int **m_g = nullptr;
+    int **m_g = NULL;
     int m_n = 0;
 }
 
@@ -60,9 +60,15 @@ Graph::Graph(int n) // fonctionne
 
 Graph::~Graph() // fonctionne
 {
-    for (int i = 0; i < m_n; i++)
-        delete[] m_g[i];
-    delete[] m_g;
+    if (m_g=NULL)
+    {
+        
+    }
+    else{
+delete[] m_g;
+    }
+    
+    
 }
 
 Graph::Graph(const Graph &Gr) // fonctionne
@@ -143,40 +149,36 @@ node *Graph::getConnexion()
     // reservation de memoire
 
     int indexConnex;
+    int indexnode;
     node *nd = new node[m_n];
-    for (int i = 0; i < m_n; i++)
-    {
-        nd[i].connex = new int[m_n];
-    }
+    int *connex = new int[m_n];
 
     for (int i = 0; i < m_n; i++)
     {
-
-        indexConnex = 0;
         nd[i].node = i;
+        indexConnex = 0;
+        indexnode = 0;
         for (int j = 0; j < m_n; j++)
         {
             if (m_g[i][j] == 1)
             {
-
-                nd[i].connex[indexConnex] = indexConnex;
-
+                connex[indexConnex] = indexnode;
+                indexnode++;
                 indexConnex++;
             }
-            else if (m_g[i][j] != 1)
+            else
             {
-
-                nd[i].connex[indexConnex] = 0;
-
-                indexConnex++;
-            }
-            else if (i == j)
-            {
-                nd[i].connex[indexConnex] = 0;
-                indexConnex++;
+                indexnode++;
             }
         }
         nd[i].tailleConnex = indexConnex;
+        nd[i].connex = new int[nd[i].tailleConnex + 1];
+        nd[i].taillenode = indexnode;
+        nd[i].taillemat = m_n;
+        for (int j = 0; j < nd[i].tailleConnex; j++)
+        {
+            nd[i].connex[j] = connex[j];
+        }
     }
 
     return nd;
@@ -186,13 +188,17 @@ void Graph::printNode(node *nd)
 {
     for (int i = 0; i < m_n; i++)
     {
-        cout << "[" << nd[i].node + 1 << "]";
+        cout << "[" << nd[i].node << "]";
+        cout << "couleur :" << nd[i].color;
         // cout << "{" << nd[i].couleur << "}" << endl;
         cout << ": (";
-        for (int j = 0; j < m_n; j++)
+        for (int j = 0; j < nd[i].tailleConnex; j++)
         {
 
-            cout << nd[i].connex[j] << ", ";
+            cout << "{" << nd[nd[i].connex[j]].node << "}";
+            cout << "couleur :";
+            cout << nd[nd[i].connex[j]].color;
+            cout << " |";
         }
         cout << " )" << endl;
     }
@@ -489,15 +495,20 @@ void Graph::ColoriageGraph(Graph g)
     int test;
     for (int i = 0; i < m_n; i++)
     {
-
-        while (TestCouleurNode(nd[i], nd))
+        cout << "CONTROL" << endl;
+        for (int j = 0; j < nd[i].tailleConnex; j++)
         {
-            test = (int)nd[i].color;
-            nd[i].color = (Couleur)(test + 1);
+            cout << nd[i].color << endl;
+            cout << nd[nd[i].connex[j]].color << endl;
+            cout << "CONTROL1" << endl;
+            if (nd[i].color == nd[nd[i].connex[j]].color)
+            {
+                nd[i].color++;
+            }
         }
     }
 }
-/*Return true if */
+/*Return true if la couleur de la node est la meme*/
 bool Graph::TestCouleurNode(node nd, node *ndtab)
 {
     for (int i = 0; i < m_n; i++)
@@ -510,7 +521,7 @@ bool Graph::TestCouleurNode(node nd, node *ndtab)
             }
         }
     }
-     return false;
+    return false;
 }
 
 int Graph::getTaille() // GETtaille
