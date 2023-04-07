@@ -32,10 +32,10 @@ node* a;
 
 g.randomGraph();
 g.affichageGraph();
-a=g.getConnexion();
-g.printNode(a);
-freenodetab(a);
+g.ColoriageGraph(g);
+// freenodetab(a);
 std::cout << "d" << std::endl;
+
 
 
 

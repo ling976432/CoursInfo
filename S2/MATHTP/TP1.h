@@ -3,6 +3,7 @@ using namespace std;
 #include <iostream>
 #include <math.h>
 #include <vector>
+#include <algorithm>
 #pragma once
 #define MAX 999999
 
@@ -32,7 +33,7 @@ struct node
     int *connex;
     int tailleConnex=0;
     int wet=0; // wet == 0 not wet, wet==1 is wet
-    int color=1;
+    int color;
 };
 
 class Graph
@@ -43,6 +44,8 @@ private:
     int m_n;   // taille du graphe (matrice carré)
     int Max(int a, int b);
     int Min(int a, int b);
+    int MinVector(vector<int> a);
+    int MaxVector(vector<int> a);
 
 public:
     int step[10] = {};

@@ -33,6 +33,29 @@ int Graph::Min(int a, int b)
     }
 }
 
+int Graph::MinVector(vector<int> a)
+{
+    int min = a[0];
+    std::cout << a.size() << std::endl;
+    for (int i = 0; i < a.size(); i++)
+    {
+        min = Min(min, a[i]);
+    }
+
+    return min;
+}
+
+int Graph::MaxVector(vector<int> a)
+{
+    int max = a[0];
+    for (int i = 0; i < a.size(); i++)
+    {
+        max = Max(max, a[i]);
+    }
+
+    return max;
+}
+
 Graph::Graph() // fonctionne
 {
     int **m_g = NULL;
@@ -60,15 +83,13 @@ Graph::Graph(int n) // fonctionne
 
 Graph::~Graph() // fonctionne
 {
-    if (m_g=NULL)
+    if (m_g = NULL)
     {
-        
     }
-    else{
-delete[] m_g;
+    else
+    {
+        delete[] m_g;
     }
-    
-    
 }
 
 Graph::Graph(const Graph &Gr) // fonctionne
@@ -495,41 +516,61 @@ void Graph::ColoriageGraph(Graph g)
     int test;
     for (int i = 0; i < m_n; i++)
     {
-        cout << "CONTROL" << endl;
+        if (i==0)
+        {
+          nd[i].color=0;  
+        }
+        
+        
+        vector<int> couleurNode;
         for (int j = 0; j < nd[i].tailleConnex; j++)
         {
-            cout << nd[i].color << endl;
-            cout << nd[nd[i].connex[j]].color << endl;
-            cout << "CONTROL1" << endl;
-            if (nd[i].color == nd[nd[i].connex[j]].color)
-            {
-                nd[i].color++;
-            }
+            couleurNode.push_back(nd[nd[i].connex[j]].color);
         }
-    }
-}
-/*Return true if la couleur de la node est la meme*/
-bool Graph::TestCouleurNode(node nd, node *ndtab)
-{
-    for (int i = 0; i < m_n; i++)
-    {
-        for (int j = 0; j < nd.tailleConnex; j++)
+
+        
+        sort(couleurNode.begin(), couleurNode.end());
+
+        for (int couleurDisponible = 0; couleurDisponible < couleurNode.size(); couleurDisponible++)
         {
-            if (ndtab[ndtab[i].connex[j]].color == nd.color)
+            if (couleurDisponible!=couleurNode[i])
             {
-                return true;
+                nd[i].color=couleurDisponible;
+            }
+            if (couleurDisponible==couleurNode.size()-1)
+            {
+                nd[i].color=couleurDisponible+1;
+            }
+            
+        }
+        
+        
+        
+    }
+    printNode(nd);
+}
+    /*Return true if la couleur de la node est la meme*/
+    bool Graph::TestCouleurNode(node nd, node * ndtab)
+    {
+        for (int i = 0; i < m_n; i++)
+        {
+            for (int j = 0; j < nd.tailleConnex; j++)
+            {
+                if (ndtab[ndtab[i].connex[j]].color == nd.color)
+                {
+                    return true;
+                }
             }
         }
+        return false;
     }
-    return false;
-}
 
-int Graph::getTaille() // GETtaille
-{
-    return m_n;
-}
+    int Graph::getTaille() // GETtaille
+    {
+        return m_n;
+    }
 
-int **Graph::getMat() // get mat
-{
-    return m_g;
-}
+    int **Graph::getMat() // get mat
+    {
+        return m_g;
+    }

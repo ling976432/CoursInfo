@@ -3,6 +3,7 @@
         "cassert": "cpp",
         "iostream": "cpp",
         "ostream": "cpp",
-        "new": "cpp"
+        "new": "cpp",
+        "algorithm": "cpp"
     }
 }
